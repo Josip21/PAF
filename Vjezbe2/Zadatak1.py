@@ -1,11 +1,32 @@
-import matplotlib.pyplot as plt
-import numpy as nps
-x = nps.linspace(0, 2, 100)
+F = float(input("Unesi silu u N:"))
+m = float(input("Unesi masu u kilogramima:"))
+a = F/m
+vp = float(input("Unesi početnu brzinu:"))
+xp = float(input("Unesi početni položaj:"))
+VK = []
+XK = []
+Y = []
+A = []
 
-plt.plot(x, x, label='linear')  # Plot some data on the (implicit) axes.
-plt.plot(x, x**2, label='quadratic')  # etc.
-plt.plot(x, x**3, label='cubic')
-plt.xlabel('x label')
-plt.ylabel('y label')
-plt.title("Simple Plot")
-plt.legend()
+for t in range(1,11):
+    vk = vp + a*t
+    VK.append(vk)
+
+    xk = xp + vk*t
+    XK.append(xk)
+    Y.append(t)
+    A.append(a)
+
+import matplotlib
+import matplotlib.pyplot as plt
+
+fig1 = plt.figure()
+fig1.suptitle('Grafovi')
+
+plt.subplot(2,2,1)
+plt.plot(Y, XK, label = 'x-t graf')
+
+plt.subplot(2,2,2)
+plt.plot(Y, A, label = 'a-t graf')
+
+plt.show()
