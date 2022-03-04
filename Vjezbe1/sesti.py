@@ -16,6 +16,8 @@ def nacrtaj_kruznicu_i_tocku(xi, yi, r, xt, yt):
         elif p == 'PDF':
             ime = input("Unesite ime PDF")
             plt.savefig(f'{ime}.pdf')
+            break
+        
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -31,6 +33,14 @@ while True:
     yi = float(input('Unesi y'))
 
     if xi == str or yi == str:
+        print('Broj ne string')
+    else:
+        break
+while True:
+    xt = float(input('Unesi xt: '))
+    yt = float(input('Unesi xt: '))
+
+    if xi == str or yt == str:
         print('Broj ne string')
     else:
         break
