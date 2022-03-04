@@ -11,3 +11,4 @@ while True:
         print("Ponovi unos")
     else:
         print("y={}*x+{}".format(k,l))
+        break

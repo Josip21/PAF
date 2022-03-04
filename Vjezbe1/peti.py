@@ -10,9 +10,8 @@ def graf(x1,y1,x2,y2):
     elif p == "PDF":
         ime = input("Ime PDF")
         plt.savefog(f"{ime}.pdf")
-import matplotlib
-import matplotlib.pyplot as plt
 
+import matplotlib.pyplot as plt
 
 x1 = float(input("Unesi koordinatu:"))
 y1 = float(input("Unesi koordinatu:"))
