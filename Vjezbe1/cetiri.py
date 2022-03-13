@@ -4,4 +4,4 @@ def funkcija(x1,y1,x2,y2):
     return print("y={}*x+{}".format(k,l)) 
 
 
-funkcija(1,1,2,2)
+funkcija(2,2,4,4)
