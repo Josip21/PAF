@@ -37,7 +37,7 @@ for i in range(n):
     sy = sy + vy*delta_t
     Y.append(sy)
 
-import matplotlib
+
 import matplotlib.pyplot as plt
 
 fig, axes = plt.subplots(2,2)
