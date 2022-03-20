@@ -5,3 +5,4 @@ def funkcija(x1,y1,x2,y2):
 
 
 funkcija(2,2,4,4)
+
