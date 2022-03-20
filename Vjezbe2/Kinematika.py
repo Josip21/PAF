@@ -3,7 +3,7 @@ from math import cos
 from math import pi 
 import matplotlib.pyplot as plt
 
-def jednoliko_gibanje(F, m, vp, xp):
+def jed_gib(F, m, vp, xp):
 
     a = F/m
     VK = []
@@ -33,7 +33,7 @@ def jednoliko_gibanje(F, m, vp, xp):
 
 
 
-def kosi_hitac(theta, v0, t):
+def kosi_h(theta, v0, t):
     thetarad = theta*pi/180
     a = 9.81
     t = 10
