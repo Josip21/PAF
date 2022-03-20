@@ -17,7 +17,6 @@ for t in range(1,11):
     Y.append(t)
     A.append(a)
 
-import matplotlib
 import matplotlib.pyplot as plt
 
 fig1 = plt.figure()
