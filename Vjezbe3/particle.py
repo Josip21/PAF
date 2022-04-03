@@ -1,66 +1,59 @@
-import math
+import numpy as np
+import math as m
 import matplotlib.pyplot as plt
 
 class Particle:
-    g = -9.81
-
-    def _init_(self):
-        self.t = []
-        self.x = []
-        self.y = []
-        self.v_x = []
-        self.v_y = []
-        self.a_x = []
-        self.a_y = []
-
-    def init(self, v, theta, x_0, y_0, dt=0.001):
-        self.t.append(0)
-        self.x.append(x_0)
-        self.y.append(y_0)
-        self.v_x.append(v*math.cos(math.radians(theta)))
-        self.a_x.append(0)
-        self.a_y.append(self.g)
+    def __init__(self, v0, alfa, x0, y0, dt = 0.01):
+        self.v0 = v0
         self.dt = dt
-        
-        self.name = "kosi_hitac_" + str(v) + "_" + str(theta)
+        self.alfa = m.radians(alfa)
+        self.x0 = x0
+        self.y0 = y0
+        self.x_x = []
+        self.y_y = []
+        self.vx = self.v0 * m.cos(self.alfa)
+        self.vy = self.v0 * m.sin(self.alfa)
+        self.x_x.append(self.x0)
+        self.y_y.append(self.y0)
+
+    def printInfo(self):
+        print("v0 = {0:-2f}, alfa = {1:.2f}, x0 = {2:.2f}, y0 = {3:.2f}".format(self.v0, self.alfa, self.x0, self.y0))
 
     def reset(self):
-        self.t.clear()
-        self.x.clear()
-        self.y.clear()
-        self.v_x.clear()
-        self.v_y.clear()
-        self.a_x.clear()
-        self.a_y.clear()
-
-    def __move(self, i):
-        self.t.append(self.t[i-1] + self.dt)
-        self.a_x.append(0)
-        self.a_y.append(self.g)
-        self.v_x.append(self.v_x[i-1] + self.a_x[i]*self.dt)
-        self.v_y.append(self.v_y[i-1] + self.a_y[i]*self.dt)
-        self.x.append(self.x[i-1] + self.v_x[i]*self.dt)
-        self.y.append(self.y[i-1] + self.v_y[i]*self.dt)
+        self.v0 = 0
+        self.alfa = 0
+        self.x0 = 0
+        self.y0 = 0
+        self.x_x = []
+        self.y_y = []
+        self.vx = 0
+        self.vy = 0
+    
+    def __move(self, t):
+        self.x0 = self.x0 + self.vx * t
+        self.vy = self.vy - 9.81 * t
+        self.y0 = self.y0 + self.vy * t
+        self.x_x.append(self.x0)
+        self.y_y.append(self.y0)
 
     def range(self):
-        i = 0
-
-        while self.y[i] >= 0:
-            self.__move(i)
-            i += 1
-
-        return self.x[i]
+        O = self.x0
+        while True:
+            self.__move(self.dt)
+            if self.y0 <= 0:
+                break
+        m = self.x0 - O
+        return m
 
     def plot_trajectory(self):
-        fig = plt.figure(figsize=(20,10))
+        plt.plot(self.x_x, self.y_y)
+        plt.ylabel('y(m)')
+        plt.xlabel('x(m)')
+        plt.title("x-y graf")
+        plt.show()
 
-        plt.plot(self.x, self.y)
-        plt.xlabel('x [m]')
-        plt.ylabel('y [m]')
-        plt.title('x-y graf')
 
-        v = math.sqrt(self.v_x[0]**2 + self.v_y[0]**2)
-        fig.savefig(self.name + ".pdf")
-        
-
-    
+# 2. zadatak iz V3
+    def analitic(self):
+        a = ((self.v0**2) * m.sin(2 * self.alfa)) / 9.81
+        return a

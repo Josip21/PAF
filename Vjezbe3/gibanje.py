@@ -1,36 +1,45 @@
 import particle as prt
-import numpy as np
+import math as m
 import matplotlib.pyplot as plt
+import domaci_rad_1 as dr
 
-p1 = prt.Particle()
+p1 = prt.Particle(20, 30, 5, 5)
+p1.printInfo()
+rng = p1.range()
 
-p1.init(100, 45, 0, 0)
-print("Za v={0} i kut {1} domet je {2:.2f} m.".format(100, 45, p1.range()))
-p1.plot_trajectory()
-p1.reset()
-
-p1.init(10,60,0,0)
-print("Za v={0} i kut {1} domet je {2:.2f} m.".format(10, 60, p1.range()))
-p1.plot_trajectory()
-p1.reset()
-
-time = []
-error = []
-analitical = 8.83
-
-for dt in np.arange(0.00005, 0.1, 0.00005):
-    p1.init(10,60,0,0,dt)
-    time.append(dt)
-    error.append(100*(abs(p1.range()-analitical)/analitical))
-    p1.reset()
-
-fig= plt.figure(figsize=(20,10))
+p2 = prt.Particle(15, 40, 3, 3)
+p2.printInfo()
+rng = p2.range()
+print("Domet: {}".format(rng))
 
 
-time.reverse()
-plt.plot(time,error)
-plt.xlabel('dt [s]')
-plt.ylabel('Absolute relative error [%]')
-plt.title('Aboslute relative error for range of projectile')
+# Rješenje DR1
 
-fig.savefig("relative_error.pdf")
+d1 = dr.Particle(15, 40, 3, 3)
+d1.range()
+time = d1.total_time()
+print("Ukupno vrijeme gibanja: {} s".format(time))
+d1.reset()
+
+d1 = dr.Particle(20, 40, 10, 10)
+speed = d1.max_speed()
+print("Najveća brzina gibanja: {} m/s".format(speed))
+d1.reset()
+d1 = dr.Particle(20, 40, 10, 10)
+vel = d1.velocity_to_hit_target(45, 20, 20, 5)
+print("Početna brzina potrebna za pogoditi metu: {} m/s".format((vel)))
+d1.reset()
+d1 = dr.Particle(20, 40, 10, 10)
+ang = d1.angle_to_hit_target(22, 20, 20, 5)
+print("Kut otklona potreban za pogoditi metu: {} degrees".format(ang))
+d1.reset()
+
+d1 = dr.Particle(20, 40, 10, 10)
+d1.plot_trajectory2(30)
+d1.reset()
+d1 = dr.Particle(20, 40, 10, 10)
+d1.plot_trajectory3(30)
+d1.reset()
+
+
+
